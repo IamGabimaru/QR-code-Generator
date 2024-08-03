@@ -1,0 +1,360 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    background: -webkit-linear-gradient(90deg, rgb(0, 110, 217), rgb(30, 144, 255), rgb(0, 110, 217));
+    background: -moz-linear-gradient(90deg, rgb(0, 110, 217), rgb(30, 144, 255), rgb(0, 110, 217));
+    background: linear-gradient(90deg, rgb(0, 110, 217), rgb(30, 144, 255), rgb(0, 110, 217));
+}
+
+::selection {
+    color: #fff;
+    background-color: dodgerblue;
+}
+
+
+$width: 420px;
+$border-radius: 8px;
+$gap: 16px;
+%flexColumn16 {
+    display: flex;
+    flex-direction: column;
+    gap: $gap * 1.25;
+}
+
+
+.wrapper {
+    background-color: #fff;
+    -webkit-box-shadow: 0px 0px 50px 35px rgba(34, 60, 80, 0.25);
+    -moz-box-shadow: 0px 0px 50px 35px rgba(34, 60, 80, 0.25);
+    box-shadow: 0px 0px 50px 35px rgba(34, 60, 80, 0.25);
+    max-width: $width;
+    padding: 20px;
+    margin: auto 10px;
+    border-radius: $border-radius;
+    @extend %flexColumn16;
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        gap: $gap / 2;
+
+        .title {
+            display: flex;
+
+            h1 {
+                font-size: 28px;
+                font-weight: normal;
+            }
+
+            .img-wrapper {
+                position: relative;
+
+                img {
+                    margin-left: 6px;
+                    opacity: 45%;
+                }
+    
+                &:hover::before {
+                    position: absolute;
+                    left: 5px;
+                    width: 123px;
+                    content: "«QR - Quick Response - Быстрый Отклик» — это двухмерный штрихкод (бар-код), предоставляющий информацию для быстрого ее распознавания с помощью камеры на мобильном телефоне. При помощи QR-кода можно закодировать любую информацию, например: текст, номер телефона, ссылку на сайт или визитную карточку.";
+                    font-size: 12px;
+                    background: #ccc;
+                    padding: 8px;
+                    border-radius: $border-radius;
+                }
+            }
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 24px;
+            color: gray;
+        }
+    }
+}
+
+
+.main {
+    @extend %flexColumn16;
+}
+
+.form {
+    @extend %flexColumn16;
+}
+
+.form__input {
+    padding: 12px;
+    font-size: 20px;
+    border-radius: $border-radius;
+}
+
+.advanced-features {
+    display: none;
+    flex-direction: column;
+    gap: $gap;
+}
+
+.advanced-features__label-switch {
+    display: flex;
+    gap: $gap / 2;
+    align-items: center;
+    font-size: 18px;
+
+    input {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.advanced-features__inner {
+    display: none;
+    flex-direction: column;
+    padding: 3px;
+
+    span:first-child {
+        margin-bottom: 30px;
+    }
+
+    span:last-child {
+        margin-top: 20px;
+    }
+
+    span {
+        border: 1px solid #ccc;
+    }
+
+    label {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: $gap / 2;
+
+        .wrapper-ecc {
+            display: flex;
+
+            .wrapper-ecc__img {
+                position: relative;
+                
+                img {
+                    margin-left: 6px;
+                    opacity: 45%;
+                }
+    
+                &:hover::before {
+                    position: absolute;
+                    left: -37px;
+                    width: 165px;
+                    content: "Чем больше ECC, тем больше данных можно восстановить, если QR-код поврежден. Более высокий ECC приводит к большему количеству сохраняемых данных. Cамый низкий ECC является лучшим выбором для общих целей — устаревшие считыватели QR-кодов являются более распространенной проблемой, чем разрушенные QR-коды. L (7%), M (15%), Q (25%), H (30%)";
+                    font-size: 12px;
+                    background: #ccc;
+                    padding: 8px;
+                    border-radius: $border-radius;
+                }
+            }
+        }
+        
+        input, select {
+            margin-bottom: $gap;
+            border-radius: $border-radius;
+            padding: $gap / 4;
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+        }
+    }
+
+    .advanced-features__color-inner {
+        justify-content: space-around;
+    }
+
+    p {
+        display: flex;
+        justify-content: center;
+        margin-bottom: $gap / 1.5;
+    }
+}
+
+.advanced-features__size, .advanced-features__ecc, .advanced-features__format {
+    width: $width / 2.4;
+}
+
+.advanced-features__input-color, .advanced-features__input-bgcolor {
+    width: calc(($width - (20px * 2)) / 4);
+}
+
+.advanced-features__input-bgcolor {
+    margin-bottom: $gap / 2;
+}
+
+
+.button {
+    padding: 24px;
+    background-color: dodgerblue;
+    color: #fff;
+    border-radius: $border-radius;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+
+    &:active {
+        opacity: 0.85;
+    }
+}
+
+
+.qr-code {
+    justify-content: center;
+    opacity: 0;
+    border: 2px solid rgba($color: gray, $alpha: 0.75);
+    border-radius: $border-radius;
+    display: none;
+
+    img {
+        display: none;
+        max-width: 100%;
+    }
+}
+
+.wrapper .qr-code {
+    opacity: 1;
+    padding: 30px 0;
+}
+
+
+.buttons {
+    flex-direction: column;
+    gap: $gap * 1.25;
+    display: none;
+}
+
+.share-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    min-width: 100dvw;
+    background-color: rgba($color: #000, $alpha: 0.5);
+    display: none;
+}
+
+.share {
+    padding: 36px;
+    border: none;
+    border-radius: $border-radius;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 45px;
+    max-width: calc($width - (20px * 2));
+    top: calc(50% - 123px);
+    left: calc(50% - (($width - (20px * 2)) / 2));
+    display: none;
+}
+
+.share__close {
+    box-sizing: content-box;
+    position: absolute;
+    cursor: pointer;
+    padding: 10px;
+    top: 0px;
+    right: 0px;
+}
+
+
+
+@media (max-width: 439px) {
+    .wrapper .header .title .img-wrapper:hover::before {
+        left: auto;
+        right: -90px;
+    }
+    
+    .form__input, .form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 408px) {
+    .wrapper .header .title .img-wrapper:hover::before {
+        left: auto;
+        right: -60px;
+    }
+}
+
+@media (max-width: 400px) {
+    .share {
+        max-width: 300px;
+        left: calc(50% - 150px);
+        top: calc(50% - 177px);
+    }
+}
+
+@media (max-width: 377px) {
+    .wrapper .header .title .img-wrapper:hover::before {
+        left: auto;
+        right: -24px;
+    }
+}
+
+@media (max-width: 350px) {
+    .form__input, .button {
+        font-size: 18px;
+    }
+
+    .wrapper.active .qr-code {
+        padding: 20px 0;
+    }
+
+    .wrapper .header .title h1 {
+        font-size: 26px;
+    }
+
+    .wrapper .header p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 327px) {
+    .wrapper .header p {
+        font-size: 15px;
+    }
+
+    .form__input, .button {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 297px) {
+    .wrapper {
+        gap: 14px;
+    }
+    
+    .form {
+        gap: 14px;
+    }
+
+    .form__input, .button {
+        font-size: 15px;
+    }
+
+    .button {
+        padding: 22px;
+    }
+
+    .wrapper.active .qr-code {
+        padding: 10px;
+    }
+}
