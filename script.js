@@ -103,7 +103,7 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
 
 
-    let inputValue = input.value.trim();
+    let inputValue = input.value.trim().replace(/\s+/g, "%2B").replace(/(#)/g, "%23").replace(/(\+)/g, "%2B").replace(/(")/g, "%27");
     let format = advancedFeaturesFormat.value.trim();
     let size = advancedFeaturesSize.value.trim();
     if (size == "") {size = 250}
@@ -147,7 +147,6 @@ form.addEventListener("submit", (event) => {
 
     waitingGenerationQR();
     img.src = `https://api.qrserver.com/v1/create-qr-code/?data=${inputValue}&format=${format}&size=${size}x${size}&ecc=${ecc}&color=${color1}-${color2}-${color3}&bgcolor=${bgcolor1}-${bgcolor2}-${bgcolor3}`;
-    console.log(img.src);
 
     img.addEventListener("error", () => {
         num = 2;
@@ -194,13 +193,13 @@ form.addEventListener("submit", (event) => {
             shareWrapper.style.display = "none";
         }
     });
-
-    imgreplace = img.src.replace(/&/g, '%26');
-    shareTelegram.href = `https://t.me/share/url?url=${imgreplace}`;
-    shareVk.href = `https://vk.com/share.php?url=${imgreplace}&title=qr-код`;
-    shareOk.href = `https://connect.ok.ru/offer?url=${imgreplace}&title=qr-код`;
-    shareWhatsapp.href = `https://wa.me/?text=${imgreplace}`;
-    shareMail.href = `mailto:mail.com&body=${imgreplace}`;
+    
+    let imgsrc = img.src.replace(/(&)/g, "%26");
+    shareTelegram.href = `https://t.me/share/url?url=${imgsrc}`;
+    shareVk.href = `https://vk.com/share.php?url=${imgsrc}&title=qr-код`;
+    shareOk.href = `https://connect.ok.ru/offer?url=${imgsrc}&title=qr-код`;
+    shareWhatsapp.href = `https://wa.me/?text=${imgsrc}`;
+    shareMail.href = `mailto:mail.com&body=${imgsrc}`;
 
     shareClose.addEventListener("click", () => {
         share.style.display = "none";
