@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <script defer src="script.js"></script>
 
     <link rel="icon" href="images/icon.gif">
     <title>Генератор QR-кода</title>
@@ -24,62 +24,68 @@
         <main class="main">
             <form class="form">
                 <input class="form__input" type="text" required autocomplete="off" placeholder="Введите текст или URL" name="input" >
-                <div class="advanced-features">
-                    <label class="advanced-features__label-switch">Расширенные функции
+                <div class="advanced-features__wrapper">
+                    <div class="advanced-features__switch-wrapper">
+                        <p class="advanced-features__label-switch">Расширенные функции</p>
                         <input class="advanced-features__switch" type="checkbox" name="Switch">
-                    </label>
+                    </div>
 
-                    <div class="advanced-features__inner">
-                            <span></span>
-                            <label>
-                                <p>Формат</p>
-                                <select class="advanced-features__format" name="Format">
-                                    <option selected disabled value="">Выбрать формат</option>
-                                    <option value="png">png</option>
-                                    <option value="jpg">jpg</option>
-                                    <option value="jpeg">jpeg</option>
-                                    <option value="svg">svg</option>
-                                    <option value="gif">gif</option>
-                                </select>
-                            </label>
-                            
-                            <label>
-                                <p>Размер</p>
-                                <input class="advanced-features__size" type="number" min="50" max="1000" placeholder="от 50 до 1000" autocomplete="off" name="Size">
-                            </label>
-                            <label>
-                                <div class="wrapper-ecc">
-                                    <p>ECC</p>
-                                    <div class="wrapper-ecc__img">
-                                        <img src="images/hint.png" width="16" height="16" loading="lazy" title="" alt="подсказка">
-                                    </div>
+                    <div class="advanced-features">
+                        <span></span>
+                        <div class="advanced-features__format-wrapper">
+                            <p>Формат</p>
+                            <select class="advanced-features__format" name="Format">
+                                <option selected disabled value="">Выбрать формат</option>
+                                <option value="png">png</option>
+                                <option value="jpg">jpg</option>
+                                <option value="jpeg">jpeg</option>
+                                <option value="svg">svg</option>
+                                <option value="gif">gif</option>
+                            </select>
+                        </div>
+
+                        <div class="advanced-features__size-wrapper">
+                            <p>Размер</p>
+                            <input class="advanced-features__size" type="number" min="50" max="1000" placeholder="от 50 до 1000" autocomplete="off" name="Size">
+                        </div>
+
+                        <div class="advanced-features__ecc-wrapper">
+                            <div class="advanced-features__ecc-hint-wrapper">
+                                <p>ECC</p>
+                                <div class="advanced-features__ecc-hint">
+                                    <img src="images/hint.png" width="16" height="16" loading="lazy" title="" alt="подсказка">
                                 </div>
-                                <select class="advanced-features__ecc" name="ECC">
-                                    <option selected disabled value="">Избыточность данных</option>
-                                    <option value="L">L</option>
-                                    <option value="M">M</option>
-                                    <option value="Q">Q</option>
-                                    <option value="H">H</option>
-                                </select>
-                            </label>
+                            </div>
+                            <select class="advanced-features__ecc" name="ECC">
+                                <option selected disabled value="">Избыточность данных</option>
+                                <option value="L">L</option>
+                                <option value="M">M</option>
+                                <option value="Q">Q</option>
+                                <option value="H">H</option>
+                            </select>
+                        </div>
 
+                        <div class="advanced-features__color-wrapper">
                             <p>Цвет QR-кода (RGB)</p>
-                            <label class="advanced-features__color-inner">
-                                <input class="advanced-features__input-color af-color1" type="number" min="0" max="255" placeholder="R:от 0 до 255" autocomplete="off" name="Color1">
-                                <input class="advanced-features__input-color af-color2" type="number" min="0" max="255" placeholder="G:от 0 до 255" autocomplete="off" name="Color2">
-                                <input class="advanced-features__input-color af-color3" type="number" min="0" max="255" placeholder="B:от 0 до 255" autocomplete="off" name="Color3">
-                            </label>
+                            <div class="advanced-features__color">
+                                <input class="advanced-features__color-input af-color1" type="number" value="0" min="0" max="255" placeholder="R:от 0 до 255" autocomplete="off" name="Color1">
+                                <input class="advanced-features__color-input af-color2" type="number" value="0" min="0" max="255" placeholder="G:от 0 до 255" autocomplete="off" name="Color2">
+                                <input class="advanced-features__color-input af-color3" type="number" value="0" min="0" max="255" placeholder="B:от 0 до 255" autocomplete="off" name="Color3">
+                            </div>
+                        </div>
 
+                        <div class="advanced-features__bgcolor-wrapper">
                             <p>Цвет фона QR-кода (RGB)</p>
-                            <label class="advanced-features__color-inner">
-                                <input class="advanced-features__input-bgcolor af-bg-color1" type="number" min="0" max="255" placeholder="R:от 0 до 255" autocomplete="off" name="BGColor1">
-                                <input class="advanced-features__input-bgcolor af-bg-color2" type="number" min="0" max="255" placeholder="G:от 0 до 255" autocomplete="off" name="BGColor2">
-                                <input class="advanced-features__input-bgcolor af-bg-color3" type="number" min="0" max="255" placeholder="B:от 0 до 255" autocomplete="off" name="BGColor3">
-                            </label>
-                            <span></span>
+                            <div class="advanced-features__bgcolor">
+                                <input class="advanced-features__bgcolor-input af-bg-color1" type="number" value="255" min="0" max="255" placeholder="R:от 0 до 255" autocomplete="off" name="BGColor1">
+                                <input class="advanced-features__bgcolor-input af-bg-color2" type="number" value="255" min="0" max="255" placeholder="G:от 0 до 255" autocomplete="off" name="BGColor2">
+                                <input class="advanced-features__bgcolor-input af-bg-color3" type="number" value="255" min="0" max="255" placeholder="B:от 0 до 255" autocomplete="off" name="BGColor3">
+                            </div>
+                        </div>
+                        <span></span>
                     </div>
                 </div>
-                <button class="button">Сгенерировать QR-код</button>
+                <button class="button">Сгенерировать QR-&#8288;код</button>
             </form>
             <div class="qr-code">
                 <img src="" alt="qr-код">
@@ -90,19 +96,19 @@
             </div>
             <div class="share-wrapper">
                 <dialog class="share">
-                    <a class="share__telegram" target="_blank">
+                    <a class="share__telegram" target="_blank" href="">
                         <img src="images/share/telegram-icon.svg" width="60" height="60" loading="lazy" alt="Телеграм">
                     </a>
-                    <a class="share__vk" target="_blank">
+                    <a class="share__vk" target="_blank" href="">
                         <img src="images/share/vk-icon.svg" width="60" height="60" loading="lazy" alt="Вконтакте">
                     </a>
-                    <a class="share__ok" target="_blank">
+                    <a class="share__ok" target="_blank" href="">
                         <img src="images/share/odnoklassniki-icon.svg" width="60" height="60" loading="lazy" alt="Одноклассники">
                     </a>
-                    <a class="share__whatsapp" target="_blank">
+                    <a class="share__whatsapp" target="_blank" href="">
                         <img src="images/share/whatsapp-icon.svg" width="60" height="60" loading="lazy" alt="Телеграм">
                     </a>
-                    <a class="share__mail" target="_blank">
+                    <a class="share__mail" target="_blank" href="">
                         <img src="images/share/mail-icon.svg" width="60" height="60" loading="lazy" alt="Почта">
                     </a>                    
                     <img class="share__close" src="images/share/close.svg" width="20" height="20" loading="lazy" alt="закрыть">

@@ -1,9 +1,10 @@
 const wrapper = document.querySelector(".wrapper"),
     form = wrapper.querySelector(".form"),
-    advancedFeatures = form.querySelector(".advanced-features"),
+    input = form.querySelector(".form__input"),
+    advancedFeatures = form.querySelector(".advanced-features__wrapper"),
     advancedFeaturesLabelSwitch = advancedFeatures.querySelector(".advanced-features__label-switch"),
     advancedFeaturesSwitch = advancedFeatures.querySelector(".advanced-features__switch"),
-    advancedFeaturesInner = advancedFeatures.querySelector(".advanced-features__inner"),
+    advancedFeaturesInner = advancedFeatures.querySelector(".advanced-features"),
     advancedFeaturesFormat = advancedFeatures.querySelector(".advanced-features__format"),
     advancedFeaturesSize = advancedFeatures.querySelector(".advanced-features__size"),
     advancedFeaturesECC = advancedFeatures.querySelector(".advanced-features__ecc"),
@@ -13,10 +14,9 @@ const wrapper = document.querySelector(".wrapper"),
     advancedFeaturesBGColor1 = advancedFeatures.querySelector(".af-bg-color1"),
     advancedFeaturesBGColor2 = advancedFeatures.querySelector(".af-bg-color2"),
     advancedFeaturesBGColor3 = advancedFeatures.querySelector(".af-bg-color3"),
-    input = form.querySelector(".form__input"),
+    qrCodeWrapper = wrapper.querySelector(".qr-code"),
+    qrCode = wrapper.querySelector(".qr-code img"),
     button = form.querySelector(".button"),
-    qr = wrapper.querySelector(".qr-code"),
-    img = wrapper.querySelector(".qr-code img"),
     buttons = wrapper.querySelector(".buttons"),
     buttonCopy = buttons.querySelector(".button-copy"),
     buttonShare = buttons.querySelector(".button-share"),
@@ -28,6 +28,7 @@ const wrapper = document.querySelector(".wrapper"),
     shareWhatsapp = share.querySelector(".share__whatsapp"),
     shareMail = share.querySelector(".share__mail"),
     shareClose = share.querySelector(".share__close");
+
 
 let currentValueInput;
 let currentValueFormat;
@@ -41,6 +42,7 @@ let currentValueBGColor2;
 let currentValueBGColor3;
 let counter = 0;
 let num = 0;
+
 
 function counter7() {
     if (counter == 7) {
@@ -80,7 +82,6 @@ function waitingGenerationQR() {
         }, 500);
     }, 500);
 }
-
 
 
 advancedFeaturesSwitch.addEventListener("change", function() {
@@ -146,18 +147,18 @@ form.addEventListener("submit", (event) => {
 
 
     waitingGenerationQR();
-    img.src = `https://api.qrserver.com/v1/create-qr-code/?data=${inputValue}&format=${format}&size=${size}x${size}&ecc=${ecc}&color=${color1}-${color2}-${color3}&bgcolor=${bgcolor1}-${bgcolor2}-${bgcolor3}`;
+    qrCode.src = `https://api.qrserver.com/v1/create-qr-code/?data=${inputValue}&format=${format}&size=${size}x${size}&ecc=${ecc}&color=${color1}-${color2}-${color3}&bgcolor=${bgcolor1}-${bgcolor2}-${bgcolor3}`;
 
-    img.addEventListener("error", () => {
+    qrCode.addEventListener("error", () => {
         num = 2;
         alert("Ошибка при загрузке QR-кода.");
         location.reload();
     });
 
-    img.addEventListener("load", () => {
+    qrCode.addEventListener("load", () => {
         num = 2;
-        qr.style.display = "flex";
-        img.style.display = "initial";
+        qrCodeWrapper.style.display = "flex";
+        qrCode.style.display = "initial";
         buttons.style.display = "flex";
         wrapper.classList.add("active");
         button.textContent = "Сгенерировать QR-код";
@@ -166,14 +167,13 @@ form.addEventListener("submit", (event) => {
     input.addEventListener("input", function() {
         if (!this.value.trim() && wrapper.classList.contains("active")) {
             wrapper.classList.remove("active");
-            qr.style.display = "none";
-            img.style.display = "none";
+            qrCodeWrapper.style.display = "none";
             buttons.style.display = "none";
         }
     });
 
     buttonCopy.addEventListener("click", () => {
-        navigator.clipboard.writeText(img.src);
+        navigator.clipboard.writeText(qrCode.src);
 
         buttonCopy.textContent = "Скопировано!";
         setTimeout(() => {
@@ -194,12 +194,12 @@ form.addEventListener("submit", (event) => {
         }
     });
     
-    let imgsrc = img.src.replace(/(&)/g, "%26");
-    shareTelegram.href = `https://t.me/share/url?url=${imgsrc}`;
-    shareVk.href = `https://vk.com/share.php?url=${imgsrc}&title=qr-код`;
-    shareOk.href = `https://connect.ok.ru/offer?url=${imgsrc}&title=qr-код`;
-    shareWhatsapp.href = `https://wa.me/?text=${imgsrc}`;
-    shareMail.href = `mailto:mail.com&body=${imgsrc}`;
+    let qrCodeSrc = qrCode.src.replace(/(&)/g, "%26");
+    shareTelegram.href = `https://t.me/share/url?url=${qrCodeSrc}`;
+    shareVk.href = `https://vk.com/share.php?url=${qrCodeSrc}&title=qr-код`;
+    shareOk.href = `https://connect.ok.ru/offer?url=${qrCodeSrc}&title=qr-код`;
+    shareWhatsapp.href = `https://api.whatsapp.com/send?text=${qrCodeSrc}`;
+    shareMail.href = `mailto:mail.com&body=${qrCodeSrc}`;
 
     shareClose.addEventListener("click", () => {
         share.style.display = "none";

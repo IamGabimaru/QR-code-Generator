@@ -38,39 +38,47 @@ body {
   margin: auto 10px;
   border-radius: 8px;
 }
-.wrapper .header {
+
+.header {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-.wrapper .header .title {
+.header p {
+  font-size: 18px;
+  line-height: 24px;
+  color: gray;
+}
+
+.title {
   display: flex;
 }
-.wrapper .header .title h1 {
+.title h1 {
   font-size: 28px;
   font-weight: normal;
 }
-.wrapper .header .title .img-wrapper {
+
+.img-wrapper {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.wrapper .header .title .img-wrapper img {
+.img-wrapper img {
   margin-left: 6px;
   opacity: 45%;
 }
-.wrapper .header .title .img-wrapper:hover::before {
+.img-wrapper:hover::before {
   position: absolute;
-  left: 5px;
+  top: 29px;
+  left: -51px;
   width: 123px;
-  content: "«QR - Quick Response - Быстрый Отклик» — это двухмерный штрихкод (бар-код), предоставляющий информацию для быстрого ее распознавания с помощью камеры на мобильном телефоне. При помощи QR-кода можно закодировать любую информацию, например: текст, номер телефона, ссылку на сайт или визитную карточку.";
+  content: "QR - Quick Response - Быстрый Отклик — это двухмерный штрихкод, распознаётся с помощью камеры на мобильном телефоне. При помощи QR-кода можно закодировать любую информацию, например: текст, номер телефона, ссылку на сайт или визитную карточку.";
   font-size: 12px;
   background: #ccc;
   padding: 8px;
   border-radius: 8px;
-}
-.wrapper .header p {
-  font-size: 18px;
-  line-height: 24px;
-  color: gray;
+  z-index: 2;
 }
 
 .form__input {
@@ -79,93 +87,102 @@ body {
   border-radius: 8px;
 }
 
-.advanced-features {
+.advanced-features__wrapper {
   display: none;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+}
+
+.advanced-features__switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .advanced-features__label-switch {
-  display: flex;
-  gap: 8px;
-  align-items: center;
   font-size: 18px;
 }
-.advanced-features__label-switch input {
-  width: 14px;
-  height: 14px;
+
+.advanced-features__switch {
+  width: 15px;
+  height: 15px;
 }
 
-.advanced-features__inner {
+.advanced-features {
   display: none;
   flex-direction: column;
   padding: 3px;
 }
-.advanced-features__inner span:first-child {
-  margin-bottom: 30px;
-}
-.advanced-features__inner span:last-child {
-  margin-top: 20px;
-}
-.advanced-features__inner span {
+.advanced-features span {
   border: 1px solid #ccc;
 }
-.advanced-features__inner label {
+.advanced-features span:first-child {
+  margin-bottom: 30px;
+}
+.advanced-features span:last-child {
+  margin-top: 20px;
+}
+.advanced-features :nth-last-child(2), .advanced-features :nth-last-child(3) {
+  justify-content: center;
+}
+
+.advanced-features__format-wrapper label, .advanced-features__format-wrapper input, .advanced-features__format-wrapper select, .advanced-features__size-wrapper label, .advanced-features__size-wrapper input, .advanced-features__size-wrapper select, .advanced-features__ecc-wrapper label, .advanced-features__ecc-wrapper input, .advanced-features__ecc-wrapper select {
+  max-width: 170px;
+  width: 100%;
+}
+
+.advanced-features__ecc-hint-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 8px;
 }
-.advanced-features__inner label .wrapper-ecc {
-  display: flex;
-}
-.advanced-features__inner label .wrapper-ecc .wrapper-ecc__img {
-  position: relative;
-}
-.advanced-features__inner label .wrapper-ecc .wrapper-ecc__img img {
+
+.advanced-features__ecc-hint img {
   margin-left: 6px;
   opacity: 45%;
 }
-.advanced-features__inner label .wrapper-ecc .wrapper-ecc__img:hover::before {
-  position: absolute;
-  left: -37px;
-  width: 165px;
+.advanced-features__ecc-hint:hover::before {
   content: "Чем больше ECC, тем больше данных можно восстановить, если QR-код поврежден. Более высокий ECC приводит к большему количеству сохраняемых данных. Cамый низкий ECC является лучшим выбором для общих целей — устаревшие считыватели QR-кодов являются более распространенной проблемой, чем разрушенные QR-коды. L (7%), M (15%), Q (25%), H (30%)";
+  position: absolute;
+  left: -3px;
+  top: 23px;
+  width: 165px;
   font-size: 12px;
   background: #ccc;
   padding: 8px;
   border-radius: 8px;
+  z-index: 2;
 }
-.advanced-features__inner label input, .advanced-features__inner label select {
+
+.advanced-features__format-wrapper, .advanced-features__size-wrapper, .advanced-features__ecc-wrapper, .advanced-features__color-wrapper, .advanced-features__bgcolor-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-bottom: 8px;
+  position: relative;
+}
+.advanced-features__format-wrapper p, .advanced-features__size-wrapper p, .advanced-features__ecc-wrapper p, .advanced-features__color-wrapper p, .advanced-features__bgcolor-wrapper p {
+  margin-bottom: 10px;
+}
+.advanced-features__format-wrapper input, .advanced-features__format-wrapper select, .advanced-features__size-wrapper input, .advanced-features__size-wrapper select, .advanced-features__ecc-wrapper input, .advanced-features__ecc-wrapper select, .advanced-features__color-wrapper input, .advanced-features__color-wrapper select, .advanced-features__bgcolor-wrapper input, .advanced-features__bgcolor-wrapper select {
   margin-bottom: 16px;
   border-radius: 8px;
   padding: 4px;
 }
-.advanced-features__inner label input::-webkit-outer-spin-button, .advanced-features__inner label input::-webkit-inner-spin-button, .advanced-features__inner label select::-webkit-outer-spin-button, .advanced-features__inner label select::-webkit-inner-spin-button {
+.advanced-features__format-wrapper input::-webkit-outer-spin-button, .advanced-features__format-wrapper input::-webkit-inner-spin-button, .advanced-features__format-wrapper select::-webkit-outer-spin-button, .advanced-features__format-wrapper select::-webkit-inner-spin-button, .advanced-features__size-wrapper input::-webkit-outer-spin-button, .advanced-features__size-wrapper input::-webkit-inner-spin-button, .advanced-features__size-wrapper select::-webkit-outer-spin-button, .advanced-features__size-wrapper select::-webkit-inner-spin-button, .advanced-features__ecc-wrapper input::-webkit-outer-spin-button, .advanced-features__ecc-wrapper input::-webkit-inner-spin-button, .advanced-features__ecc-wrapper select::-webkit-outer-spin-button, .advanced-features__ecc-wrapper select::-webkit-inner-spin-button, .advanced-features__color-wrapper input::-webkit-outer-spin-button, .advanced-features__color-wrapper input::-webkit-inner-spin-button, .advanced-features__color-wrapper select::-webkit-outer-spin-button, .advanced-features__color-wrapper select::-webkit-inner-spin-button, .advanced-features__bgcolor-wrapper input::-webkit-outer-spin-button, .advanced-features__bgcolor-wrapper input::-webkit-inner-spin-button, .advanced-features__bgcolor-wrapper select::-webkit-outer-spin-button, .advanced-features__bgcolor-wrapper select::-webkit-inner-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-.advanced-features__inner .advanced-features__color-inner {
+
+.advanced-features__color, .advanced-features__bgcolor {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   justify-content: space-around;
 }
-.advanced-features__inner p {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10.6666666667px;
-}
 
-.advanced-features__size, .advanced-features__ecc, .advanced-features__format {
-  width: 175px;
-}
-
-.advanced-features__input-color, .advanced-features__input-bgcolor {
+.advanced-features__color-input, .advanced-features__bgcolor-input {
   width: 95px;
-}
-
-.advanced-features__input-bgcolor {
-  margin-bottom: 8px;
 }
 
 .button {
@@ -237,18 +254,8 @@ body {
 }
 
 @media (max-width: 439px) {
-  .wrapper .header .title .img-wrapper:hover::before {
-    left: auto;
-    right: -90px;
-  }
   .form__input, .form {
     width: 100%;
-  }
-}
-@media (max-width: 408px) {
-  .wrapper .header .title .img-wrapper:hover::before {
-    left: auto;
-    right: -60px;
   }
 }
 @media (max-width: 400px) {
@@ -258,48 +265,9 @@ body {
     top: calc(50% - 177px);
   }
 }
-@media (max-width: 377px) {
+@media (max-width: 381px) {
   .wrapper .header .title .img-wrapper:hover::before {
     left: auto;
-    right: -24px;
-  }
-}
-@media (max-width: 350px) {
-  .form__input, .button {
-    font-size: 18px;
-  }
-  .wrapper.active .qr-code {
-    padding: 20px 0;
-  }
-  .wrapper .header .title h1 {
-    font-size: 26px;
-  }
-  .wrapper .header p {
-    font-size: 16px;
-  }
-}
-@media (max-width: 327px) {
-  .wrapper .header p {
-    font-size: 15px;
-  }
-  .form__input, .button {
-    font-size: 17px;
-  }
-}
-@media (max-width: 297px) {
-  .wrapper {
-    gap: 14px;
-  }
-  .form {
-    gap: 14px;
-  }
-  .form__input, .button {
-    font-size: 15px;
-  }
-  .button {
-    padding: 22px;
-  }
-  .wrapper.active .qr-code {
-    padding: 10px;
+    right: -20px;
   }
 }/*# sourceMappingURL=style.css.map */
